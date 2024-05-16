@@ -4,6 +4,41 @@
   "sourceRoot": "apps/social-network",
   "projectType": "application",
   "tags": [],
-  "// targets": "to see all targets run: nx show project social-network --web",
-  "targets": {}
+  "targets": {
+    "build": {
+      "executor": "@nrwl/next:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/social-network",
+        "root": "apps/social-network",
+        "fileReplacements": [],
+        "assets": ["apps/social-network/public"],
+        "styles": [],
+        "scripts": [],
+        "nextConfig": "apps/social-network/next.config.js"
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/next:server",
+      "options": {
+        "buildTarget": "social-network:build",
+        "dev": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/social-network/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/social-network"],
+      "options": {
+        "jestConfig": "apps/social-network/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  }
 }
